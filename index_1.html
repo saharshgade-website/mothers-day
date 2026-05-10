@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Mother's Day Amma 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Dancing+Script:wght@700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: #1a0a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Lato', sans-serif;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* Click hint */
+  .click-hint {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(249, 168, 212, 0.7);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: hintPulse 2s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 100;
+  }
+  @keyframes hintPulse {
+    0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 1; transform: translateX(-50%) translateY(-4px); }
+  }
+
+  /* Starfield background */
+  .starfield {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    animation: twinkle var(--dur) ease-in-out infinite alternate;
+  }
+  @keyframes twinkle {
+    from { opacity: 0.1; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1.2); }
+  }
+
+  /* Floating petals */
+  .petal {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1;
+    font-size: 1.5rem;
+    animation: floatDown var(--fall-dur) linear infinite;
+    opacity: 0;
+  }
+  @keyframes floatDown {
+    0% { transform: translateY(-60px) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* Card */
+  .card-wrap {
+    position: relative;
+    z-index: 10;
+    perspective: 1200px;
+  }
+  .card {
+    width: min(420px, 92vw);
+    background: linear-gradient(145deg, #fff0f6, #ffe4f0, #fff8e1);
+    border-radius: 28px;
+    padding: 48px 36px 44px;
+    text-align: center;
+    box-shadow:
+      0 0 0 2px #f9a8d4,
+      0 0 40px rgba(249, 168, 212, 0.5),
+      0 24px 80px rgba(90, 0, 60, 0.35);
+    position: relative;
+    overflow: hidden;
+    animation: cardEntrance 1.2s cubic-bezier(.175,.885,.32,1.275) both;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+  }
+  @keyframes cardEntrance {
+    from { opacity: 0; transform: scale(0.5) rotateY(30deg); }
+    to { opacity: 1; transform: scale(1) rotateY(0deg); }
+  }
+
+  .card.clicked {
+    animation: cardPop 0.3s cubic-bezier(.175,.885,.32,1.275);
+  }
+  @keyframes cardPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.96); }
+    100% { transform: scale(1); }
+  }
+
+  /* Shimmer overlay */
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.5) 50%, transparent 60%);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+    pointer-events: none;
+    border-radius: 28px;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Decorative border */
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 2px dashed rgba(249, 168, 212, 0.6);
+    border-radius: 22px;
+    pointer-events: none;
+    animation: rotateBorder 20s linear infinite;
+  }
+  @keyframes rotateBorder {
+    from { opacity: 0.4; }
+    50% { opacity: 1; }
+    to { opacity: 0.4; }
+  }
+
+  .emoji-row {
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+    animation: bounceIn 1s 0.4s cubic-bezier(.175,.885,.32,1.275) both;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  .emoji-row span {
+    display: inline-block;
+    animation: floatBob 2s ease-in-out infinite;
+  }
+  .emoji-row span:nth-child(1) { animation-delay: 0s; }
+  .emoji-row span:nth-child(2) { animation-delay: 0.3s; }
+  .emoji-row span:nth-child(3) { animation-delay: 0.6s; }
+  .emoji-row span:nth-child(4) { animation-delay: 0.9s; }
+  .emoji-row span:nth-child(5) { animation-delay: 1.2s; }
+  @keyframes floatBob {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-12px) rotate(5deg); }
+  }
+  @keyframes bounceIn {
+    from { opacity: 0; transform: scale(0) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .happy {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 7vw, 3rem);
+    color: #be185d;
+    letter-spacing: 1px;
+    line-height: 1;
+    animation: fadeSlideUp 0.8s 0.6s both;
+    text-shadow: 2px 2px 0px rgba(190,24,93,0.2);
+    position: relative;
+    z-index: 2;
+  }
+
+  .mothers-day {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    font-weight: 700;
+    color: #831843;
+    line-height: 1.1;
+    margin: 4px 0 6px;
+    animation: fadeSlideUp 0.8s 0.8s both;
+    position: relative;
+    z-index: 2;
+  }
+
+  .amma {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.8rem, 10vw, 4.2rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, #db2777, #f97316, #db2777);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeSlideUp 0.8s 1s both, gradientShift 3s 1.8s linear infinite;
+    display: block;
+    position: relative;
+    z-index: 2;
+  }
+  @keyframes gradientShift {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .divider {
+    margin: 18px auto;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #f9a8d4, transparent);
+    animation: fadeSlideUp 0.8s 1.2s both, pulseWidth 2s 2s ease-in-out infinite;
+  }
+  @keyframes pulseWidth {
+    0%, 100% { width: 80px; opacity: 0.7; }
+    50% { width: 130px; opacity: 1; }
+  }
+
+  .message {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(0.95rem, 3.2vw, 1.1rem);
+    color: #9d174d;
+    line-height: 1.7;
+    padding: 0 8px;
+    animation: fadeSlideUp 0.8s 1.4s both;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hearts-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    animation: fadeSlideUp 0.8s 1.6s both;
+    position: relative;
+    z-index: 2;
+  }
+  .heart {
+    font-size: 1.6rem;
+    display: inline-block;
+    animation: heartBeat 1.2s ease-in-out infinite;
+  }
+  .heart:nth-child(1) { animation-delay: 0s; }
+  .heart:nth-child(2) { animation-delay: 0.2s; font-size: 2rem; }
+  .heart:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.2); }
+    70% { transform: scale(1); }
+  }
+
+  /* Sparkles */
+  .sparkle {
+    position: absolute;
+    pointer-events: none;
+    font-size: 1.2rem;
+    animation: sparklePop 2s ease-in-out infinite;
+    z-index: 3;
+  }
+  @keyframes sparklePop {
+    0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; }
+    50% { transform: scale(1) rotate(180deg); opacity: 1; }
+  }
+
+  .rainbow-bar {
+    height: 6px;
+    background: linear-gradient(90deg, #f43f5e, #fb923c, #fbbf24, #34d399, #60a5fa, #a78bfa, #f43f5e);
+    background-size: 200% auto;
+    border-radius: 0 0 28px 28px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    animation: rainbowSlide 3s linear infinite;
+  }
+  @keyframes rainbowSlide {
+    from { background-position: 0% center; }
+    to { background-position: 200% center; }
+  }
+
+  /* Pulse rings */
+  .pulse-ring {
+    position: absolute;
+    inset: -4px;
+    border-radius: 32px;
+    border: 2px solid rgba(249, 168, 212, 0.4);
+    animation: pulseRing 2.5s ease-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .pulse-ring:nth-child(2) { animation-delay: 0.8s; }
+  .pulse-ring:nth-child(3) { animation-delay: 1.6s; }
+  @keyframes pulseRing {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.08); opacity: 0; }
+  }
+
+  /* ===== HEART BURST PARTICLES ===== */
+  .burst-heart {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    font-size: var(--size);
+    transform: translate(-50%, -50%);
+    animation: burstFly var(--dur) var(--ease) forwards;
+    will-change: transform, opacity;
+  }
+
+  @keyframes burstFly {
+    0% {
+      transform: translate(-50%, -50%) scale(0) rotate(0deg);
+      opacity: 1;
+    }
+    20% {
+      transform: translate(calc(-50% + var(--tx) * 0.2), calc(-50% + var(--ty) * 0.2)) scale(1.4) rotate(var(--rot));
+      opacity: 1;
+    }
+    100% {
+      transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0.3) rotate(calc(var(--rot) * 3));
+      opacity: 0;
+    }
+  }
+
+  /* Ripple on click */
+  .click-ripple {
+    position: fixed;
+    border-radius: 50%;
+    border: 3px solid rgba(249, 168, 212, 0.8);
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%) scale(0);
+    animation: rippleExpand 0.8s ease-out forwards;
+  }
+  @keyframes rippleExpand {
+    to { transform: translate(-50%, -50%) scale(1); opacity: 0; width: 200px; height: 200px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="starfield" id="starfield"></div>
+<div id="petals"></div>
+
+<p class="click-hint">✨ tap anywhere to spread love ✨</p>
+
+<div class="card-wrap">
+  <div class="pulse-ring"></div>
+  <div class="pulse-ring"></div>
+  <div class="pulse-ring"></div>
+
+  <div class="card" id="card">
+    <span class="sparkle" style="top:16px;left:20px;animation-delay:0s">✨</span>
+    <span class="sparkle" style="top:16px;right:20px;animation-delay:0.7s">⭐</span>
+    <span class="sparkle" style="top:50%;left:12px;animation-delay:1.3s">✨</span>
+    <span class="sparkle" style="top:50%;right:12px;animation-delay:0.4s">⭐</span>
+
+    <div class="emoji-row">
+      <span>🌸</span><span>🌷</span><span>💐</span><span>🌺</span><span>🌹</span>
+    </div>
+
+    <div class="happy">Happy</div>
+    <div class="mothers-day">Mother's Day</div>
+    <span class="amma">Amma</span>
+
+    <div class="divider"></div>
+
+    <p class="message">
+      You are my sunshine, my strength,<br>
+      and my everything. Thank you for<br>
+      your endless love and warm hugs. 🤍
+    </p>
+
+    <div class="hearts-container">
+      <span class="heart">🩷</span>
+      <span class="heart">❤️</span>
+      <span class="heart">🩷</span>
+    </div>
+
+    <div class="rainbow-bar"></div>
+  </div>
+</div>
+
+<script>
+  // ── Starfield ──
+  const starfield = document.getElementById('starfield');
+  for (let i = 0; i < 80; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random() * 3 + 1;
+    star.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${Math.random()*3+1.5}s;animation-delay:${Math.random()*3}s`;
+    starfield.appendChild(star);
+  }
+
+  // ── Floating petals ──
+  const petalEmojis = ['🌸','🌺','🌷','💮','🌼'];
+  const petalsContainer = document.getElementById('petals');
+  for (let i = 0; i < 18; i++) {
+    const petal = document.createElement('div');
+    petal.className = 'petal';
+    petal.textContent = petalEmojis[Math.floor(Math.random()*petalEmojis.length)];
+    const dur = Math.random()*6+5;
+    petal.style.cssText = `left:${Math.random()*100}%;--fall-dur:${dur}s;animation-delay:${Math.random()*8}s;font-size:${Math.random()*1.2+0.8}rem`;
+    petalsContainer.appendChild(petal);
+  }
+
+  // ── Card hover tilt ──
+  const card = document.getElementById('card');
+  const cardWrap = document.querySelector('.card-wrap');
+  cardWrap.addEventListener('mousemove', (e) => {
+    const rect = cardWrap.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / (rect.width / 2);
+    const dy = (e.clientY - cy) / (rect.height / 2);
+    card.style.transform = `rotateY(${dx*10}deg) rotateX(${-dy*10}deg) scale(1.02)`;
+    card.style.transition = 'transform 0.1s ease';
+  });
+  cardWrap.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.transition = 'transform 0.5s ease';
+  });
+
+  // ── Heart Burst on Click ──
+  const heartEmojis = ['❤️','🩷','🧡','💛','💚','💙','💜','🤍','💖','💗','💓','💞','💕'];
+
+  function spawnHearts(x, y) {
+    const count = 18 + Math.floor(Math.random() * 10);
+
+    // Ripple
+    const ripple = document.createElement('div');
+    ripple.className = 'click-ripple';
+    ripple.style.cssText = `left:${x}px;top:${y}px;width:10px;height:10px`;
+    document.body.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 900);
+
+    for (let i = 0; i < count; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'burst-heart';
+      heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+
+      const angle = (Math.PI * 2 / count) * i + (Math.random() - 0.5) * 0.6;
+      const distance = 80 + Math.random() * 140;
+      const tx = Math.cos(angle) * distance;
+      const ty = Math.sin(angle) * distance - Math.random() * 60; // bias upward
+      const size = 1.2 + Math.random() * 1.8;
+      const dur = 0.7 + Math.random() * 0.6;
+      const rot = (Math.random() - 0.5) * 360;
+      const ease = ['ease-out','cubic-bezier(.2,.8,.3,1)','cubic-bezier(.15,.9,.4,1)'][Math.floor(Math.random()*3)];
+
+      heart.style.cssText = `
+        left:${x}px; top:${y}px;
+        --tx:${tx}px; --ty:${ty}px;
+        --size:${size}rem;
+        --dur:${dur}s;
+        --rot:${rot}deg;
+        --ease:${ease};
+        animation-delay:${Math.random() * 0.08}s;
+      `;
+
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), (dur + 0.2) * 1000);
+    }
+
+    // Card pop
+    card.classList.remove('clicked');
+    void card.offsetWidth;
+    card.classList.add('clicked');
+    setTimeout(() => card.classList.remove('clicked'), 400);
+  }
+
+  document.addEventListener('click', (e) => spawnHearts(e.clientX, e.clientY));
+
+  // Touch support
+  document.addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+    spawnHearts(t.clientX, t.clientY);
+  }, { passive: true });
+</script>
+</body>
+</html>
